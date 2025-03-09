@@ -13,3 +13,10 @@ jobs:
           java-version: '17'
       - name: run the maven build
         run: mvn package
+      - name: Install the Docker
+        uses: docker/setup-docker-action@v4
+      - name: Login to Docker Hub
+        uses: docker/login-actions@v3
+        with:
+          username: ${{secrets.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
