@@ -2,6 +2,8 @@ name: Docker Build and Deploy
 on: workflow_dispatch
 jobs:
   BuildJob:
+    env:
+      imagename: "myjavaapp"
     runs-on: ubuntu-latest
     steps:
       - name: clone the repo
@@ -18,10 +20,12 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-actions@v3
         with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Push the Docker Image 
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: myimage:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.imagename }}:latest
+      - name: Deploy the image
+        run: echo "running docker run command"
