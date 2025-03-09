@@ -1,5 +1,5 @@
 name: Code build and Deploy 
-on: push 
+on: workflow_dispatch
 env:
  imageName: "myjavaapp"
 jobs:
