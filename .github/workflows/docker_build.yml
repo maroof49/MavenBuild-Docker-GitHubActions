@@ -2,7 +2,7 @@ name: Docker Build and Deploy
 on: workflow_dispatch
 jobs:
   BuildJob:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: clone the repo
         uses: actions/checkout@v4.2.2
